@@ -1,0 +1,21 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Job Application' %}{% endblock title %}
+
+{% block content %}
+    <div class="main-content publish center container article">
+        <div class="publish-container">
+            <div class="publish-form">
+                {% include 'global/partials/messages.html' %}
+                <h2>{% translate 'Job Application' %}</h2>
+                {% if user.is_authenticated %}
+                    {% if already_applied %}
+                        <h3>{% translate 'You have already applied to this job!' %}</h3>
+                    {% else %}
+                        {% include 'global/partials/form.html' %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

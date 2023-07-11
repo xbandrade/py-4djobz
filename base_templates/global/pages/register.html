@@ -1,0 +1,24 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate 'Register' %}{% endblock title %} 
+{% block content %}
+    {% include 'global/partials/messages.html' %}
+    <div class="main-content main-content-list container">
+        <div class="register-page-container">
+            <div class="applicant-register-div">
+                <h4>{% translate "Looking for job opportunities?" %}</h4>
+                <button class="register-button applicant">
+                    <a href="{% url 'users:u_register' %}">{% translate "Register as Applicant" %}</a>
+                </button>
+            </div>
+            <div class="company-register-div">
+                <h4>{% translate "Want to hire the best talents?" %}</h4>
+                <button class="register-button company">
+                    <a href="{% url 'users:c_register' %}">{% translate "Register as Company" %}</a>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

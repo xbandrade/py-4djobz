@@ -1,0 +1,65 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+
+{% block title %}{% translate 'Charts' %}{% endblock title %}
+
+{% block content %}
+    <div class="main-content charts-main-container">
+        {% include 'global/partials/messages.html' %}
+        <div class="dashboard-tag center">
+            <h2>{% translate 'Company Charts' %}</h2>
+            <div class="company-charts">
+                <div id="jobsChart"></div>
+                <div id="applicationsChart"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        const chartData1 = JSON.parse('{{ chart_data1|safe }}') || [];
+        const dates1 = chartData1.map(item => new Date(item.created_date__date).toISOString());
+        const jobCounts1 = chartData1.map(item => item.count);
+
+        const data1 = [{
+            x: dates1,
+            y: jobCounts1,
+            type: 'scatter',
+            mode: 'lines+markers',
+            line: { color: 'rgba(75, 192, 192, 1)' },
+            marker: { color: 'rgba(75, 192, 192, 1)', size: 8 }
+        }];
+
+        const layout1 = {        
+            title: '{% translate "Jobs Published" %}',
+            xaxis: { title: '{% translate "Date" %}' },
+            yaxis: { title: '{% translate "Count" %}' },
+            margin: { l: 100, r: 100, t: 50 }
+        };
+
+        Plotly.newPlot('jobsChart', data1, layout1);
+
+        const chartData2 = JSON.parse('{{ chart_data2|safe }}') || [];
+        const dates2 = chartData2.map(item => new Date(item.applied_date__date).toISOString());
+        const applicationCounts2 = chartData2.map(item => item.count);
+
+        const data2 = [{
+            x: dates2,
+            y: applicationCounts2,
+            type: 'scatter',
+            mode: 'lines+markers',
+            line: { color: 'rgba(75, 192, 192, 1)' },
+            marker: { color: 'rgba(75, 192, 192, 1)', size: 8 }
+        }];
+
+        const layout2 = {
+            title: '{% translate "Applications" %}',
+            xaxis: { title: '{% translate "Date" %}' },
+            yaxis: { title: '{% translate "Count" %}' },
+            margin: { l: 100, r: 100, t: 50 }
+        };
+
+        Plotly.newPlot('applicationsChart', data2, layout2);
+    </script>
+
+    
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+{% block title %}
+    {% if search_term and page_title %}
+        {{ page_title }}
+    {% else %}
+        {% translate 'Jobs List' %}
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
+    <div class="main-content center container article search-main-container jobs-main-container">
+        {% include 'global/partials/messages.html' %}
+        <div class="jobs-search-tag center">
+            <h2>{% translate 'Jobs List' %}</h2>
+        </div>
+        <div class="search-container">
+            <div class="container">
+                <form action="{% url 'jobs:search' %}" method="GET" class="search-form">
+                    <input 
+                        type="search" class="search-input" 
+                        name="q" value="{{ search_term }}" required
+                        placeholder="{% translate 'Search for a job post' %}">
+                    <button type="submit" class="search-button"><i class="fas fa-search"></i> </button>
+                </form>
+            </div>
+        </div>
+        <div class="job-list">
+            {% if jobs %}
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{% translate 'Job Title' %}</th>
+                                <th>{% translate 'Company' %}</th>
+                                <th>{% translate 'Salary' %}</th>
+                                <th>{% translate 'Minimum Education' %}</th>
+                                <th>{% translate 'Applicants' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for job in jobs %}
+                                <tr>
+                                    <td><a href="{% url 'jobs:job' job.id %}">{{ job.title }}</a></td>
+                                    <td>{{ job.company_name }}</td>
+                                    <td>
+                                        {% if job.hide_salary %}
+                                            ➖
+                                        {% else %}
+                                            {{ job.salary }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ job.minimum_education }}</td>
+                                    <td>{{ job.application_count }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <h3><p>{% translate 'No jobs found' %}</p></h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

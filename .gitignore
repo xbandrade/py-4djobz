@@ -1,0 +1,10 @@
+/.coverage
+/.env
+/.mypy_cache
+/.pytest_cache
+/.vscode
+/db.sqlite3
+/htmlcov
+/static
+/venv
+/__pycache__

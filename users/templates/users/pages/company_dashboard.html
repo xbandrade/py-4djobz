@@ -1,0 +1,77 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Dashboard' %}{% endblock title %}
+
+{% block content %}
+    <div class="main-content dashboard center container article">
+        {% include 'global/partials/messages.html' %}
+        <div class="dashboard-tag center">
+            <h2>{% translate 'Company Dashboard' %}</h2>
+            <div class="publish-job">
+                <a href="{% url 'jobs:publish' %}">{% translate "Publish a new job" %}</a>
+            </div>
+            <div class="charts-button">
+                <a href="{% url 'users:charts' %}">{% translate "Check the company charts" %}</a>
+            </div>
+            <div class="published-jobs center">
+                {% if jobs %}
+                    <h2>{% translate 'Your Published Jobs' %}</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{% translate 'ID' %}</th>
+                                    <th>{% translate 'Job Title' %}</th>
+                                    <th>{% translate 'Salary' %}</th>
+                                    <th>{% translate 'Minimum Education' %}</th>
+                                    <th>{% translate 'Skill Requirements' %}</th>
+                                    <th>{% translate 'Applicants' %}</th>
+                                    <th>{% translate 'Update Job Post' %}</th>
+                                    <th>{% translate 'Publish Status' %}</th>
+                                    <th>{% translate 'Delete Job Post' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for job in jobs %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'jobs:update' job.id %}">#{{ job.id }}</a>
+                                        </td>
+                                        <td>{{ job.title }}</td>
+                                        <td>{{ job.salary }}</td>
+                                        <td>{{ job.minimum_education }}</td>
+                                        <td>{{ job.skill_requirements }}</td>
+                                        <td><a href="{% url 'jobs:applicants' job.id %}">{{ job.application_count }}</a></td>
+                                        <td>
+                                            {% if not job.is_finished %}
+                                                <a href="{% url 'jobs:update' job.id %}">{% translate "Update" %}</a>
+                                            {% else %}
+                                                ➖
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if not job.is_finished %}
+                                                ✔️
+                                            {% else %}
+                                                ✖️
+                                            {% endif %}
+                                        </td>
+                                        <td>           
+                                            <form class="inline-form form-delete" action="{% url 'users:job_delete' %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="id" value="{{ job.id }}">
+                                                <button class="delete-button" type="submit">❌</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <h3><p>{% translate 'You have no job posts published' %}</p></h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

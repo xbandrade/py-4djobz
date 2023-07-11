@@ -1,0 +1,50 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Dashboard' %}{% endblock title %}
+
+{% block content %}
+    <div class="main-content dashboard center container article">
+        {% include 'global/partials/messages.html' %}
+        <div class="dashboard-tag center">
+            <h2>{% translate 'Dashboard' %}</h2>
+            <div class="applied-jobs applications center">
+                {% if applications %}
+                    <h2>{% translate 'Your Applicationss' %}</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{% translate 'ID' %}</th>
+                                    <th>{% translate 'Job Title' %}</th>
+                                    <th>{% translate 'Salary Expectation' %}</th>
+                                    <th>{% translate 'Minimum Education' %}</th>
+                                    <th>{% translate 'Previous Experience' %}</th>
+                                    <th>{% translate 'Status' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for application in applications %}
+                                    <tr>
+                                        <td>#{{ application.id }}</td>
+                                        <td>{{ application.job.title }}</td>
+                                        <td>{{ application.salary_expectations }}</td>
+                                        <td>{{ application.applicant_education }}</td>
+                                        <td>{{ application.applicant_experiences }}</td>
+                                        <td>
+                                            {% if not application.job.is_finished %}
+                                                {% translate "Ongoing..." %}
+                                            {% else %}
+                                                {% translate "Finished" %}
+                                            {% endif %}
+                                        </td>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <h3><p>{% translate 'You have no applications' %}</p></h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

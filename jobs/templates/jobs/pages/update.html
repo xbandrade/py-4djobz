@@ -1,0 +1,17 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Update Job' %}{% endblock title %}
+
+{% block content %}
+    <div class="main-content publish center container article">
+        <div class="publish-container">
+            <div class="publish-form">
+                {% include 'global/partials/messages.html' %}
+                <h2>{% translate 'Update Job Post' %}</h2>
+                {% if user.is_authenticated %}
+                    {% include 'global/partials/form.html' %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

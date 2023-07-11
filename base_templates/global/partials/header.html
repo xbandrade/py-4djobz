@@ -1,0 +1,43 @@
+{% load i18n %}
+{% load static %}
+<header class="main-header-container">
+    <div class="main-header container">
+        <div class="logo-container">
+            <a class="main-logo" href="{% url 'base:home' %}">
+                <h4>{% translate "4Djobz" %}</h4>
+            </a>
+        </div>
+        <div class="header-buttons">
+            <button class="plaintext-button login-header">
+                <a href="{% url 'jobs:list' %}">{% translate "Jobs Search" %}</a>
+            </button>
+            {% if user.is_authenticated %}
+                <button class="plaintext-button dashboard-header">
+                    {% if not user.is_company %}
+                        <a href="{% url 'users:u_dashboard' %}">
+                    {% else %}
+                        <a href="{% url 'users:c_dashboard' %}">
+                    {% endif %}
+                    {% translate "Dashboard" %}</a>
+                </button>
+                <form action="{% url 'users:logout' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="email" value="{{ request.user.email }}">
+                    <button class="plaintext-button logout" type="submit">
+                        {% translate 'Logout' %}
+                    </button>
+                </form>
+            {% else %}
+                <button class="plaintext-button login-header">
+                    <a href="{% url 'users:login' %}">{% translate "Login" %}</a>
+                </button>
+                <button class="plaintext-button register-header">
+                    <a href="{% url 'base:register' %}">{% translate "Register" %}</a>
+                </button>
+            {% endif %}
+            <button class="plaintext-button about-header">
+                <a href="{% url 'base:about' %}">{% translate "About" %}</a>
+            </button>
+        </div>
+    </div>
+</header>

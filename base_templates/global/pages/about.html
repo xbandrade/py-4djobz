@@ -1,0 +1,22 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate 'About' %}{% endblock title %} 
+{% block content %}
+    {% include 'global/partials/messages.html' %}
+    <div class="main-content main-content-list container">
+        <div class="about-text">
+            <ul>
+                <div class="about-title">
+                    <h1>{% translate "Welcome to 4Djobz!" %}</h1> 
+                </div>
+                {% for text in about_text %}
+                    <li>
+                        <h3>{{ text }}</h3>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock content %}

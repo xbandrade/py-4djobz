@@ -1,0 +1,15 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Login' %}{% endblock title %}
+
+{% block content %}
+    <div class="main-content center container article">
+        <h2 class="login-page">{% translate 'Login' %}</h2>
+        {% include 'global/partials/messages.html' %}
+        {% if not user.is_authenticated %}
+            <div class="login-form-wrapper">
+                {% include 'global/partials/form.html' %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

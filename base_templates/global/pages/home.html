@@ -1,0 +1,20 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% translate 'Home' %}{% endblock title %} 
+{% block content %}
+    {% include 'global/partials/messages.html' %}
+    <div class="main-content main-content-list container">
+        <div class="text-wrapper">
+            <div class="home-title">
+                <h2>{% translate 'Welcome to 4Djobz!' %}</h2>
+            </div>
+            <div class="home-container">
+                <span class="left">
+                    {% translate "Looking for a new job <br>or want to hire <br>the best talents?<br>4Djobz is the right place!" %}
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

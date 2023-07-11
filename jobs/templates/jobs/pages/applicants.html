@@ -1,0 +1,79 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+{% block title %}{% translate 'Applicants for ' %}{{ job }}{% endblock title %}
+
+{% block content %}
+    <div class="main-content dashboard center container article">
+        {% include 'global/partials/messages.html' %}
+        <div class="dashboard-tag center">
+            <h2>{% translate 'Applicants for ' %}{{ job }}</h2>
+            <div class="applicants-jobs center">
+                {% if applications %}
+                    <div class="sort-container">
+                        <h3>
+                            {% if not sort_by_compatibility %}
+                                <h2>{% translate 'Sorting by order of application' %}</h2>
+                                <div class="sort-apps">
+                                    <a href="{% url 'jobs:applicants' job.id %}?sort_by_compatibility=true">
+                                        {% trans "Sort by compatibility with the Job" %}
+                                    </a>
+                                </div>
+                            {% else %}
+                                <h2>{% translate 'Sorting by best candidates for this job' %}</h2>
+                                <div class="sort-apps">
+                                    <a href="{% url 'jobs:applicants' job.id %}">
+                                       {% trans "Sort by order of application" %}
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </h3>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{% translate 'ID' %}</th>
+                                    <th>{% translate 'Applicant Full Name' %}</th>
+                                    <th>{% translate 'Applicant Email' %}</th>
+                                    <th>{% translate 'Applicant Phone Number' %}</th>
+                                    <th>{% translate 'Salary Expectation' %}</th>
+                                    <th>{% translate 'Education' %}</th>
+                                    <th>{% translate 'Experiences' %}</th>
+                                    <th>{% translate 'Years of Experience' %}</th>
+                                    <th>{% translate 'Skills' %}</th>
+                                    <th>{% translate 'Compatibility with the Job' %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for application in applications %}
+                                    <tr>
+                                        <td>#{{ application.id }}</td>
+                                        <td>{{ application.applicant_profile }}</td>
+                                        <td>{{ application.applicant_profile.user }}</td>
+                                        <td>{{ application.applicant_profile.user.phone_number }}</td>
+                                        <td>{{ application.salary_expectations }}</td>
+                                        <td>{{ application.applicant_education }}</td>
+                                        <td>{{ application.applicant_experiences }}</td>
+                                        <td>{{ application.applicant_profile.years_experience }}</td>
+                                        <td>{{ application.applicant_profile.skills }}</td>
+                                        <td>
+                                            {% if application.compatibility == 2 %}
+                                                ➕➕
+                                            {% elif application.compatibility == 1 %}
+                                                ➕
+                                            {% else %}
+                                                ➖
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <h3><p>{% translate 'No applications found for this job' %}</p></h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
