@@ -38,9 +38,9 @@ Após fazer login, os dois tipos de usuários têm dashboards diferentes.
   - `Candidatos para a vaga` ➔ lista os candidatos que aplicaram para aquela vaga, com opções para ordenar a lista por compatibilidade com a vaga, baseado na escolaridade e na expectativa salarial do candidato
 
 
-❕O arquivo `db.sqlite3.bkp` contém uma database previamente populada com diversos candidatos, empresas, candidaturas e vagas publicadas.
- ➔ Login de candidato na database teste: b@email.com, senha 9264
- ➔ Login de empresa na database teste: baxx@email.com, senha 9264
+#### O arquivo `db.sqlite3.bkp` contém uma database previamente populada com diversos candidatos, empresas, candidaturas e vagas publicadas.
+ - ➔ Login de candidato na database teste: b@email.com, senha 9264
+ - ➔ Login de empresa na database teste: baxx@email.com, senha 9264
 
 ## ✔️ Testes
 ❕O projeto foi feito utilizando TDD com `pytest`, com testes unitários e de integração que estão armazenados na pasta `/tests/` de cada app.
