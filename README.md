@@ -12,6 +12,8 @@ Para executar o projeto em um ambiente local, siga os passos abaixo:
 
 Por padrão, o Django vai subir o projeto em `http://127.0.0.1:8000/`.
 
+<img src="https://raw.githubusercontent.com/xbandrade/py-4djobz/main/screenshots/jobs_list.png" width=70% height=70%>
+
 ## 💻 Funcionalidades do Website
 
 #### Header da Página Inicial:
@@ -30,12 +32,17 @@ Após fazer login, os dois tipos de usuários têm dashboards diferentes.
 - `Buscar Vagas` ➔ lista as publicações de vagas mais recentes, com opções de busca por título da vaga e candidatura ao acessar os detalhes
   - `Candidatar-se` ➔ envia uma candidatura à vaga, os campos `expectativa salarial`, `escolaridade mínima` e `experiências` são obrigatórios
 
+<img src="https://raw.githubusercontent.com/xbandrade/py-4djobz/main/screenshots/applications.png" width=70% height=70%>
+
 
 ### Dashboard da Empresa:
 - `Publicar Vaga` ➔ envia uma nova publicação de vaga, os campos `Título da Vaga`, `Salário`, `Escolaridade` e `Requisitos` são obrigatórios e é possível ocultar o salário da vaga para candidatos.
 - `Checar gráficos da empresa` ➔ gera gráficos a partir dos dados de vagas publicadas e candidaturas nas vagas da empresa no último mês
 - `Suas Vagas Publicadas` ➔ lista todas as vagas publicadas pela empresa, com detalhes da vaga, opções para editar/deletar e acesso a todos os candidatos que aplicaram à vaga 
   - `Candidatos para a vaga` ➔ lista os candidatos que aplicaram para aquela vaga, com opções para ordenar a lista por compatibilidade com a vaga, baseado na escolaridade e na expectativa salarial do candidato
+
+
+<img src="https://github.com/xbandrade/py-4djobz/blob/main/screenshots/company_charts2.png" width=70% height=70%>
 
 
 #### O arquivo `db.sqlite3.bkp` contém uma database previamente populada com diversos candidatos, empresas, candidaturas e vagas publicadas.
